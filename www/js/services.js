@@ -47,4 +47,16 @@ angular.module('starter.services', [])
       return null;
     }
   };
+})
+
+.factory('Trucks', function($http) {
+
+  return {
+    truckIds: function() {
+      return $http({
+        method: 'GET',
+        url: 'https://perrystowingserver.herokuapp.com/trucks/ids'
+      })
+    }
+  }
 });
