@@ -57,6 +57,12 @@ angular.module('starter.services', [])
         method: 'GET',
         url: 'https://perrystowingserver.herokuapp.com/trucks/ids'
       })
+    },
+    truck: function(id) {
+      return $http({
+        method: 'GET',
+        url: 'https://perrystowingserver.herokuapp.com/trucks/'+id
+      })
     }
   }
 });

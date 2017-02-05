@@ -25,8 +25,27 @@ angular.module('starter.controllers', [])
   $scope.chat = Chats.get($stateParams.chatId);
 })
 
-.controller('AccountCtrl', function($scope) {
-  $scope.settings = {
-    enableFriends: true
-  };
+.controller('AccountCtrl', function($scope, Trucks) {
+
+  Trucks.truckIds().success(function(response) {
+    $scope.truckIds = response;
+    console.log(response);
+    let localTruckId = window.localStorage.getItem('truckId');
+    console.log(localTruckId);
+    if(localTruckId) {
+      $scope.truckIds.forEach(function(element){
+        if(element.id == localTruckId) {
+          $scope.truckId = element;
+          $scope.getTruck(element);
+        }
+      })
+    }
+  });
+
+  $scope.getTruck = function(truckId) {
+    Trucks.truck(truckId.id).success(function(response){
+      $scope.truck = response;
+      window.localStorage.setItem('truckId', response.id);
+    });
+  }
 });
