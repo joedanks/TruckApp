@@ -65,4 +65,15 @@ angular.module('starter.services', [])
       })
     }
   }
+})
+
+.factory('Calls', function($http) {
+  return {
+    activeCall: function(truckId) {
+      return $http({
+        method: 'GET',
+        url: 'https://perrystowingserver.herokuapp.com/calls/activeTruck/'+truckId
+      })
+    }
+  }
 });
