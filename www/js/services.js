@@ -1,79 +1,40 @@
 angular.module('starter.services', [])
 
-.factory('Chats', function() {
-  // Might use a resource here that returns a JSON array
-
-  // Some fake testing data
-  var chats = [{
-    id: 0,
-    name: 'Ben Sparrow',
-    lastText: 'You on your way?',
-    face: 'img/ben.png'
-  }, {
-    id: 1,
-    name: 'Max Lynx',
-    lastText: 'Hey, it\'s me',
-    face: 'img/max.png'
-  }, {
-    id: 2,
-    name: 'Adam Bradleyson',
-    lastText: 'I should buy a boat',
-    face: 'img/adam.jpg'
-  }, {
-    id: 3,
-    name: 'Perry Governor',
-    lastText: 'Look at my mukluks!',
-    face: 'img/perry.png'
-  }, {
-    id: 4,
-    name: 'Mike Harrington',
-    lastText: 'This is wicked good ice cream.',
-    face: 'img/mike.png'
-  }];
-
-  return {
-    all: function() {
-      return chats;
-    },
-    remove: function(chat) {
-      chats.splice(chats.indexOf(chat), 1);
-    },
-    get: function(chatId) {
-      for (var i = 0; i < chats.length; i++) {
-        if (chats[i].id === parseInt(chatId)) {
-          return chats[i];
-        }
+  .factory('Trucks', function ($http) {
+    return {
+      truckIds: function () {
+        return $http({
+          method: 'GET',
+          url: 'https://perrystowingserver.herokuapp.com/trucks/ids'
+        })
+      },
+      truck: function (id) {
+        return $http({
+          method: 'GET',
+          url: 'https://perrystowingserver.herokuapp.com/trucks/' + id
+        })
       }
-      return null;
     }
-  };
-})
+  })
 
-.factory('Trucks', function($http) {
-
-  return {
-    truckIds: function() {
-      return $http({
-        method: 'GET',
-        url: 'https://perrystowingserver.herokuapp.com/trucks/ids'
-      })
-    },
-    truck: function(id) {
-      return $http({
-        method: 'GET',
-        url: 'https://perrystowingserver.herokuapp.com/trucks/'+id
-      })
+  .factory('Calls', function ($http) {
+    return {
+      activeCall: function (truckId) {
+        return $http({
+          method: 'GET',
+          url: 'https://perrystowingserver.herokuapp.com/calls/activeTruck/' + truckId
+        })
+      }
     }
-  }
-})
+  })
 
-.factory('Calls', function($http) {
-  return {
-    activeCall: function(truckId) {
-      return $http({
-        method: 'GET',
-        url: 'https://perrystowingserver.herokuapp.com/calls/activeTruck/'+truckId
-      })
+  .factory('DriverService', function ($http) {
+    return {
+      getAll: function (truckId) {
+        return $http({
+          method: 'GET',
+          url: 'http://localhost:8080/trucks'
+        })
+      }
     }
-  }
-});
+  });
