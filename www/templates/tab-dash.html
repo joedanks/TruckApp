@@ -1,73 +1,59 @@
-<ion-view view-title="Pickup">
+<ion-view view-title="">
   <ion-content class="padding">
-
-    <div class="card">
-      <div class="item item-divider">
-        Pickup Location
-      </div>
-      <div class="item">
-        <a href="{{call.pickupUrl}}" >{{call.pickUpLocation}}</a>
-      </div>
-    </div>
-    <div class="card">
-      <div class="item item-divider">
-        Type
-      </div>
-      <div class="item">
-        {{call.callType}}
+    <div id="truck_select">
+      Current Driver:
+      <div>
+        <select ng-model="dashCtrl.selectedTruckId" ng-change="dashCtrl.updateSelectedTruck()">
+        <option ng-repeat="truck in dashCtrl.trucks" value="{{truck.id}}">{{truck.identifier}}</option>
+      </select>
       </div>
     </div>
-    <div class="card">
-      <div class="item item-divider">
-        Customer
+    <div id="call_information" ng-if="dashCtrl.selectedTruckId">
+      <div ng-show="dashCtrl.activeCall">
+        <div class="card">
+          <div class="item item-divider">
+            Pickup Location
+          </div>
+          <div class="item">
+            <a href="{{call.pickupUrl}}">{{dashCtrl.activeCall.pickUpLocation}}</a>
+          </div>
+        </div>
+        <div class="card">
+          <div class="item item-divider">
+            Type
+          </div>
+          <div class="item">
+            {{dashCtrl.activeCall.callType}}
+          </div>
+        </div>
+        <div class="card">
+          <div class="item item-divider">
+            Customer
+          </div>
+          <div class="item">
+            {{dashCtrl.activeCall.customer.firstName}} {{dashCtrl.activeCall.customer.lastName}} | (<a href="tel:{{dashCtrl.activeCall.customer.phoneNumber}}">{{dashCtrl.activeCall.customer.phoneNumber}}</a>)
+          </div>
+        </div>
+        <div class="card">
+          <div class="item item-divider">
+            Vehicle
+          </div>
+          <div class="item">
+            {{dashCtrl.activeCall.customer.vehicle.color}} | {{dashCtrl.activeCall.customer.vehicle.make}} | {{dashCtrl.activeCall.customer.vehicle.model}} | {{dashCtrl.activeCall.customer.vehicle.licensePlateNumber}}
+          </div>
+        </div>
+        <div class="card">
+          <div class="item item-divider">
+            Price Quote
+          </div>
+          <div class="item">
+            ${{dashCtrl.activeCall.customer.priceQuote}}
+          </div>
+        </div>
       </div>
-      <div class="item">
-        {{call.customer.firstName}} {{call.customer.lastName}} | (<a href="tel:{{call.customer.phoneNumber}}">{{call.customer.phoneNumber}}</a>)
+      <div ng-hide="dashCtrl.activeCall">
+        No calls assigned, please contact dispatcher
       </div>
     </div>
-    <div class="card">
-      <div class="item item-divider">
-        Vehicle
-      </div>
-      <div class="item">
-        {{call.customer.vehicle.color}} | {{call.customer.vehicle.make}} | {{call.customer.vehicle.model}} | {{call.customer.vehicle.licensePlateNumber}}
-      </div>
-    </div>
-    <div class="card">
-      <div class="item item-divider">
-        Price Quote
-      </div>
-      <div class="item">
-        {{call.customer.priceQuote}}
-      </div>
-    </div>
-    <!--<ul class="list">-->
-      <!--<li class="item">-->
-        <!--<label class="item-input">-->
-          <!--<div class="inputLabel">-->
-            <!--Pickup Location-->
-          <!--</div>-->
-          <!--<a href="maps://0,0?q={{call.pickUpLocation}}" >{{call.pickUpLocation}}</a>-->
-        <!--</label>-->
-      <!--</li>-->
-      <!--<li class="item">-->
-        <!--<label class="item-input">-->
-          <!--<div class="inputLabel">-->
-            <!--Type-->
-          <!--</div>-->
-          <!--{{call.callType}}-->
-        <!--</label>-->
-      <!--</li>-->
-      <!--<li class="item">-->
-        <!--<label class="item-input">-->
-          <!--<div class="inputLabel">-->
-            <!--Pickup Location-->
-          <!--</div>-->
-          <!--<a href="geo:0,0?q={{pickupLocation}}" >{{pickupLocation}}</a>-->
-        <!--</label>-->
-      <!--</li>-->
-    <!--</ul>-->
-
-    <div>{{truckIds}}</div>
   </ion-content>
 </ion-view>

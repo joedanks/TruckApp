@@ -1,28 +1,29 @@
 angular.module('starter.services', [])
 
-  .factory('Trucks', function ($http) {
+
+  .factory('TruckService', function ($http) {
     return {
-      truckIds: function () {
+      getTruckIds: function () {
         return $http({
-          method: 'GET',
-          url: 'https://perrystowingserver.herokuapp.com/trucks/ids'
+          method: "GET",
+          url: window.ServiceUrl + "/trucks/ids"
         })
       },
       truck: function (id) {
         return $http({
-          method: 'GET',
-          url: 'https://perrystowingserver.herokuapp.com/trucks/' + id
+          method: "GET",
+          url: window.ServiceUrl + "/trucks/" + id
         })
       }
     }
   })
 
-  .factory('Calls', function ($http) {
+  .factory('CallService', function ($http) {
     return {
-      activeCall: function (truckId) {
+      getActiveCall: function (truckId) {
         return $http({
-          method: 'GET',
-          url: 'https://perrystowingserver.herokuapp.com/calls/activeTruck/' + truckId
+          method: "GET",
+          url: window.ServiceUrl + "/calls/activeTruck/" + truckId
         })
       }
     }
@@ -33,7 +34,7 @@ angular.module('starter.services', [])
       getAll: function (truckId) {
         return $http({
           method: 'GET',
-          url: 'http://localhost:8080/trucks'
+          url: window.ServiceUrl + "/trucks"
         })
       }
     }

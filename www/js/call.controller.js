@@ -6,8 +6,8 @@ angular.module('starter.controllers')
   this.message = 'Test Message';
   console.log('calls');
   
-  DriverService.getAll().then((trucks)=>{
-    this.trucks = trucks;  
+  DriverService.getAll().then((response)=>{
+    this.trucks = response.trucks;  
   });
 
 })
