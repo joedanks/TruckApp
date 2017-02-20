@@ -39,7 +39,8 @@
             Vehicle
           </div>
           <div class="item">
-            {{dashCtrl.activeCall.customer.vehicle.color}} | {{dashCtrl.activeCall.customer.vehicle.make}} | {{dashCtrl.activeCall.customer.vehicle.model}} | {{dashCtrl.activeCall.customer.vehicle.licensePlateNumber}}
+            {{dashCtrl.activeCall.customer.vehicle.color}} | {{dashCtrl.activeCall.customer.vehicle.make}} | {{dashCtrl.activeCall.customer.vehicle.model}}
+            | {{dashCtrl.activeCall.customer.vehicle.licensePlateNumber}}
           </div>
         </div>
         <div class="card">
@@ -53,6 +54,10 @@
       </div>
       <div ng-hide="dashCtrl.activeCall">
         No calls assigned, please contact dispatcher
+      </div>
+      <div id="truck_status_update">
+        <button ng-show="" id="start_call">Start Call</button>
+        <button ng-hide="" id="complete_call">Complete Call</button>
       </div>
     </div>
   </ion-content>
