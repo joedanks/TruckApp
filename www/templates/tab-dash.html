@@ -1,4 +1,7 @@
-<ion-view view-title="">
+<ion-view view-title="Pickup">
+  <ion-nav-buttons side="right">
+    <button class="button button-icon icon ion-loop" ng-click="dashCtrl.updateSelectedTruck()"></button>
+  </ion-nav-buttons>
   <ion-content class="padding">
     <div id="truck_select">
       Current Driver:
@@ -10,15 +13,15 @@
     </div>
     <div id="call_information" ng-if="dashCtrl.selectedTruckId">
       <div ng-show="dashCtrl.activeCall">
-        <div class="card">
+        <div class="card" ng-show="dashCtrl.activeCall.pickUpLocation">
           <div class="item item-divider">
             Pickup Location
           </div>
           <div class="item">
-            <a href="{{call.pickupUrl}}">{{dashCtrl.activeCall.pickUpLocation}}</a>
+            <a href="{{dashCtrl.activeCall.pickUpURL}})">{{dashCtrl.activeCall.pickUpLocation}}</a>
           </div>
         </div>
-        <div class="card">
+        <div class="card" ng-show="dashCtrl.activeCall.callType">
           <div class="item item-divider">
             Type
           </div>
@@ -26,7 +29,7 @@
             {{dashCtrl.activeCall.callType}}
           </div>
         </div>
-        <div class="card">
+        <div class="card" ng-show="dashCtrl.activeCall.customer">
           <div class="item item-divider">
             Customer
           </div>
@@ -34,7 +37,7 @@
             {{dashCtrl.activeCall.customer.firstName}} {{dashCtrl.activeCall.customer.lastName}} | (<a href="tel:{{dashCtrl.activeCall.customer.phoneNumber}}">{{dashCtrl.activeCall.customer.phoneNumber}}</a>)
           </div>
         </div>
-        <div class="card">
+        <div class="card" ng-show="dashCtrl.activeCall.customer.vehicle">
           <div class="item item-divider">
             Vehicle
           </div>
@@ -43,7 +46,7 @@
             | {{dashCtrl.activeCall.customer.vehicle.licensePlateNumber}}
           </div>
         </div>
-        <div class="card">
+        <div class="card" ng-show="dashCtrl.activeCall.customer.priceQuote">
           <div class="item item-divider">
             Price Quote
           </div>
@@ -56,6 +59,7 @@
         No calls assigned, please contact dispatcher
       </div>
       <div id="truck_status_update">
+
         <button ng-show="" id="start_call">Start Call</button>
         <button ng-hide="" id="complete_call">Complete Call</button>
       </div>
