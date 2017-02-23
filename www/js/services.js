@@ -14,6 +14,12 @@ angular.module('starter.services', [])
           method: "GET",
           url: window.ServiceUrl + "/trucks/" + id
         })
+      },
+      updateStatus: function(id, status) {
+        return $http({
+          method: "POST",
+          url: window.ServiceUrl + "/trucks/status/" + id + "/" + status
+        })
       }
     }
   })
@@ -24,6 +30,12 @@ angular.module('starter.services', [])
         return $http({
           method: "GET",
           url: window.ServiceUrl + "/calls/activeTruck/" + truckId
+        })
+      },
+      completeCall: function(id) {
+        return $http({
+          method: "POST",
+          url: window.ServiceUrl + "/calls/activeTruck/" + id + "/complete"
         })
       }
     }

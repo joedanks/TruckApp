@@ -54,14 +54,32 @@
             ${{dashCtrl.activeCall.customer.priceQuote}}
           </div>
         </div>
+        <div class="card" ng-show="dashCtrl.activeCall.dropOffLocation">
+          <div class="item item-divider">
+            Dropoff Location
+          </div>
+          <div class="item">
+            <a href="{{dashCtrl.activeCall.dropOffURL}})">{{dashCtrl.activeCall.dropOffLocation}}</a>
+          </div>
+        </div>
       </div>
       <div ng-hide="dashCtrl.activeCall">
         No calls assigned, please contact dispatcher
       </div>
-      <div id="truck_status_update">
+      <div id="truck_status_update" ng-show="dashCtrl.activeCall">
 
-        <button ng-show="" id="start_call">Start Call</button>
-        <button ng-hide="" id="complete_call">Complete Call</button>
+        <button ion-button
+                ng-show="dashCtrl.available"
+                id="start_call"
+                ng-click="dashCtrl.startCall()">Start Call</button>
+        <button ion-button
+                ng-hide="dashCtrl.loaded || dashCtrl.available"
+                id="load_call"
+                ng-click="dashCtrl.loadTruck()">Truck Loaded</button>
+        <button ion-button
+                ng-hide="dashCtrl.available"
+                id="complete_call"
+                ng-click="dashCtrl.completeCall()">Complete Call</button>
       </div>
     </div>
   </ion-content>
