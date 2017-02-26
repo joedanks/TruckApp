@@ -60,13 +60,8 @@ angular.module('starter.controllers', [])
         console.log(response);
         this.available = true;
         this.loaded = false;
+        this.updateSelectedTruck();
       });
-//      TruckService.updateStatus(this.selectedTruckId, "En-Route").then((response) => {
-//        console.log(response.data);
-//        if(response.data) {
-//          available = response.data.truckStatusType == "AVAILABLE";
-//        }
-//      });
     };
 
   });
